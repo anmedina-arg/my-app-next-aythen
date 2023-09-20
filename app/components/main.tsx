@@ -1,8 +1,13 @@
 import React, { ReactNode } from 'react';
 
-type MainProps = {
+interface MainProps {
   children: ReactNode;
+}
+
+const MainContainer: React.FC<MainProps> = ({ children }) => {
+  return (
+    <div className="flex justify-center items-center h-screen">{children}</div>
+  );
 };
-export const Main: React.FC<MainProps> = ({ children }) => {
-  return <body>{children}</body>;
-};
+
+export default MainContainer;
