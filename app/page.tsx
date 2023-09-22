@@ -1,5 +1,6 @@
 import MainContainer from './components/main';
+import Body from './components/main-v02';
 
 export default function Home() {
-  return <MainContainer>hola mundo</MainContainer>;
+  return <Body>hola mundo</Body>;
 }

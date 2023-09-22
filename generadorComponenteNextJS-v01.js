@@ -1,4 +1,4 @@
-//import page from './mockPage';
+// const page = require('./mockPage');
 
 function generarComponenteNextJS(nombreComponente, contenido) {
   // Plantilla del componente Next.js

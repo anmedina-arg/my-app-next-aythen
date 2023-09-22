@@ -1,0 +1,39 @@
+---
+- name: Despliegue de React Next con Ansible
+  hosts: tu_servidor
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Actualizar lista de paquetes
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Ubuntu" # Ajusta según tu sistema operativo
+
+    - name: Instalar dependencias del sistema
+      apt:
+        name:
+          - nodejs
+          - npm
+          - git
+      when: ansible_os_family == "Debian" # Ajusta según tu sistema operativo
+
+    - name: Clonar el repositorio de tu proyecto
+      git:
+        repo: https://github.com/tuusuario/tuproyecto.git
+        dest: /ruta/en/el/servidor/tuproyecto
+
+    - name: Instalar dependencias de tu proyecto
+      npm:
+        command: install
+        path: /ruta/en/el/servidor/tuproyecto
+
+    - name: Construir la aplicación
+      command: expo build:web
+      args:
+        chdir: /ruta/en/el/servidor/tuproyecto
+
+    - name: Copiar los archivos de construcción al servidor web
+      synchronize:
+        src: '/ruta/en/el/servidor/tuproyecto/web-build/'
+        dest: '/ruta/en/el/servidor/donde/deseas/alojar/la/aplicacion/'
